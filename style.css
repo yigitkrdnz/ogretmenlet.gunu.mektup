@@ -1,0 +1,765 @@
+
+/* =========================================
+   1. GENEL AYARLAR
+========================================= */
+
+:root {
+    --dark: #241710;
+    --brown: #493024;
+    --gold: #c49a55;
+    --light-gold: #e8d2a5;
+    --cream: #fffaf0;
+    --text: #49392f;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    color: var(--cream);
+
+    background:
+        radial-gradient(circle at 50% 20%, #493024 0%, transparent 45%),
+        linear-gradient(145deg, #1b110d, #302017 55%, #1d130f);
+
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    overflow-x: hidden;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+
+/* =========================================
+   2. KARŞILAMA EKRANI
+========================================= */
+#welcome {
+    position: relative;
+    isolation: isolate;
+    min-height: 100vh;
+    padding: 45px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background:
+        linear-gradient(
+            rgba(36, 23, 16, 0.35),
+            rgba(36, 23, 16, 0.65)
+        ),
+        url("./ataturk.png");
+
+    background-size: 200% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.welcome-content {
+    width: 100%;
+    max-width: 460px;
+}
+
+.eyebrow {
+    color: var(--light-gold);
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 24px;
+}
+
+#welcome h1 {
+    font-size: clamp(38px, 10vw, 57px);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--cream);
+}
+
+#welcome h1 span {
+    color: var(--light-gold);
+    font-style: italic;
+}
+
+.welcome-description {
+    max-width: 340px;
+    margin: 25px auto 35px;
+
+    color: #d3c2b0;
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+.input-label {
+    display: block;
+    margin-bottom: 10px;
+
+    color: var(--light-gold);
+    font-size: 14px;
+    text-align: left;
+}
+
+#teacherName {
+    width: 100%;
+    padding: 16px 18px;
+
+    border: 1px solid rgba(232,210,165,.5);
+    border-radius: 4px;
+
+    background: rgba(255,250,240,.08);
+    color: white;
+
+    outline: none;
+}
+
+#teacherName::placeholder {
+    color: #b7a391;
+}
+
+#teacherName:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 15px rgba(196,154,85,.15);
+}
+
+#continueButton {
+    width: 100%;
+    margin-top: 17px;
+    padding: 16px;
+
+    border: none;
+    border-radius: 4px;
+
+    background: linear-gradient(135deg, #e8d2a5, #b88a48);
+    color: #281a11;
+
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+/* =========================================
+   3. ORTAK BUTONLAR
+========================================= */
+
+button {
+    transition:
+        transform .25s ease,
+        opacity .25s ease,
+        box-shadow .25s ease;
+}
+
+button:active {
+    transform: scale(.97);
+}
+
+button:disabled {
+    opacity: .65;
+    cursor: default;
+}
+
+
+/* =========================================
+   4. MEKTUP EKRANI
+========================================= */
+
+.letter-section {
+    min-height: 100vh;
+    padding: 55px 20px 80px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+    overflow: visible;
+}
+
+#displayTeacherName {
+    margin-bottom: 25px;
+
+    color: var(--light-gold);
+    font-size: 27px;
+    font-style: italic;
+}
+
+
+/* =========================================
+   5. ZARF SAHNESİ
+========================================= */
+
+.envelope-scene {
+    width: 100%;
+    max-width: 360px;
+
+    padding-top: 270px;
+    margin: 0 auto 25px;
+
+    perspective: 1000px;
+}
+
+.envelope {
+    position: relative;
+
+    width: min(310px, 85vw);
+    height: 190px;
+
+    margin: 0 auto;
+
+    transform-style: preserve-3d;
+    isolation: isolate;
+}
+
+
+/* =========================================
+   6. MEKTUP KÂĞIDI
+========================================= */
+
+.letter-paper {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 450px;
+
+    padding: 27px 23px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(145deg, #fffdf6, #f5ead5);
+
+    color: var(--text);
+
+    border: 1px solid #d8bd88;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.3),
+        0 0 20px rgba(196,154,85,.08);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(0);
+
+    transition:
+        transform 1s cubic-bezier(.2,.75,.2,1),
+        opacity .6s ease,
+        visibility .6s ease;
+
+    z-index: 2;
+}
+
+.letter-paper::before {
+    content: "";
+
+    position: absolute;
+    inset: 11px;
+
+    border: 1px solid rgba(196,154,85,.55);
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   7. MEKTUP İÇERİĞİ
+========================================= */
+
+.paper-content {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    min-height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.letter-greeting {
+    width: 100%;
+    margin-bottom: 15px;
+
+    color: #9b7140;
+
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+.letter-greeting span {
+    font-weight: 600;
+}
+
+.letter-paper h2 {
+    margin-bottom: 16px;
+
+    color: #72502f;
+
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.letter-paper p {
+    width: 100%;
+    margin-bottom: 11px;
+
+    color: #574638;
+
+    font-size: 15px;
+    line-height: 1.45;
+}
+
+.letter-paper .letter-ending {
+    margin-top: 5px;
+    margin-bottom: 12px;
+
+    color: #987144;
+    font-style: italic;
+}
+
+
+/* =========================================
+   8. MEKTUP İMZASI
+========================================= */
+
+.letter-signature {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    margin-top: 4px;
+
+    text-align: center;
+}
+
+.signature-line {
+    width: 65px;
+    height: 1px;
+
+    margin: 0 auto 9px;
+
+    background: #c49a55;
+}
+
+.letter-signature p {
+    margin-bottom: 5px;
+
+    color: #967247;
+    font-size: 13px;
+    font-style: italic;
+}
+
+.letter-signature h3 {
+    color: #70502f;
+
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1.25;
+}
+
+.signature-star {
+    display: block;
+    margin-top: 5px;
+
+    color: #c49a55;
+    font-size: 18px;
+}
+
+
+/* =========================================
+   9. ZARFIN GÖRÜNÜMÜ
+========================================= */
+
+.envelope-back {
+    position: absolute;
+    inset: 0;
+
+    background: #9b7140;
+
+    border-radius: 3px;
+    z-index: 1;
+}
+
+.envelope-front {
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(145deg, #b88a48, #80572f);
+
+    clip-path: polygon(
+        0 0,
+        50% 58%,
+        100% 0,
+        100% 100%,
+        0 100%
+    );
+
+    z-index: 3;
+}
+
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(145deg, #d1ad70, #9d713c);
+
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        50% 58%
+    );
+
+    transform-origin: top center;
+
+    transition:
+        transform .8s ease,
+        opacity .5s ease;
+
+    z-index: 4;
+}
+
+.envelope-seal {
+    position: absolute;
+    top: 48%;
+    left: 50%;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transform: translate(-50%, -50%);
+
+    border: 1px solid #e8d2a5;
+    border-radius: 50%;
+
+    background: #75452c;
+    color: #f4d99e;
+
+    font-size: 19px;
+
+    z-index: 5;
+
+    transition: opacity .4s ease;
+}
+
+
+/* =========================================
+   10. ZARFIN AÇILMA ANİMASYONU
+========================================= */
+
+.envelope.opened .letter-paper {
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateY(-260px);
+
+    z-index: 10;
+}
+
+.envelope.opened .envelope-flap {
+    transform: rotateX(180deg);
+    opacity: .15;
+}
+
+.envelope.opened .envelope-seal {
+    opacity: 0;
+}
+
+
+/* =========================================
+   11. MEKTUP BUTONLARI
+========================================= */
+
+#openLetterButton,
+#backButton,
+#finalButton {
+    min-width: 190px;
+    margin: 12px 5px;
+    padding: 14px 22px;
+
+    border: 1px solid var(--gold);
+    border-radius: 4px;
+
+    background: linear-gradient(135deg, #d7b477, #b88a48);
+    color: #281a11;
+
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#backButton {
+    background: transparent;
+    color: var(--light-gold);
+}
+
+#finalButton {
+    background: transparent;
+    color: var(--light-gold);
+}
+
+
+/* =========================================
+   12. FİNAL EKRANI
+========================================= */
+
+.final-screen {
+    position: relative;
+
+    min-height: 100vh;
+    padding: 65px 25px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(196,154,85,.15),
+            transparent 45%
+        );
+}
+
+.final-decoration {
+    position: absolute;
+    top: 35px;
+    right: 30px;
+
+    color: rgba(232,210,165,.25);
+    font-size: 90px;
+}
+
+.final-ornament {
+    color: var(--gold);
+    font-size: 48px;
+    margin-bottom: 25px;
+}
+
+.final-screen h2 {
+    font-size: clamp(42px, 10vw, 62px);
+    font-weight: 500;
+    line-height: 1.08;
+
+    color: var(--cream);
+}
+
+.final-teacher-name {
+    margin-top: 25px;
+
+    color: var(--light-gold);
+    font-size: 25px;
+    font-style: italic;
+}
+
+.final-divider {
+    width: 90px;
+    height: 1px;
+
+    margin: 28px auto;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--gold),
+        transparent
+    );
+}
+
+.final-message {
+    max-width: 360px;
+
+    color: #d6c7b6;
+    font-size: 21px;
+    line-height: 1.7;
+}
+
+.final-thanks {
+    margin-top: 30px;
+
+    color: var(--light-gold);
+    font-size: 32px;
+    font-style: italic;
+}
+
+.final-star {
+    margin-top: 20px;
+
+    color: var(--gold);
+    font-size: 25px;
+}
+
+#homeButton {
+    margin-top: 35px;
+    padding: 15px 35px;
+
+    border: 1px solid var(--gold);
+    border-radius: 3px;
+
+    background: linear-gradient(135deg, #d7b477, #b88a48);
+    color: #281a11;
+
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.final-footer {
+    margin-top: 30px;
+
+    color: #b9a58e;
+    font-size: 17px;
+    font-style: italic;
+}
+
+
+/* =========================================
+   13. TELEFON UYUMLULUĞU
+========================================= */
+
+@media (max-width: 400px) {
+
+    #welcome {
+        padding: 35px 20px;
+    }
+
+    .letter-section {
+        padding: 40px 15px 70px;
+    }
+
+    .envelope-scene {
+        padding-top: 270px;
+    }
+
+    .letter-paper {
+        height: 470px;
+        padding: 25px 17px;
+    }
+
+    .letter-greeting {
+        font-size: 15px;
+    }
+
+    .letter-paper h2 {
+        font-size: 28px;
+    }
+
+    .letter-paper p {
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .letter-signature h3 {
+        font-size: 17px;
+    }
+
+    .final-screen {
+        padding: 45px 20px;
+    }
+
+    .final-message {
+        font-size: 19px;
+    }
+}
+
+
+/* =========================================
+   14. HAREKET AZALTMA DESTEĞİ
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+    }
+
+/* =========================================
+   15. MEKTUP MOBİL DÜZENLEME
+========================================= */
+
+.envelope {
+    overflow: visible;
+}
+
+.letter-paper {
+    height: auto;
+    min-height: 470px;
+    max-height: 75vh;
+    overflow-y: auto;
+    padding: 32px 25px;
+}
+
+.paper-content {
+    min-height: 100%;
+    justify-content: flex-start;
+    padding: 12px 0;
+}
+
+.letter-greeting {
+    margin-bottom: 12px;
+}
+
+.letter-paper h2 {
+    margin-bottom: 13px;
+}
+
+.letter-paper p {
+    overflow-wrap: break-word;
+    word-break: normal;
+}
+
+.letter-signature {
+    margin-top: 12px;
+}
+
+@media (max-width: 400px) {
+    .letter-paper {
+        min-height: 470px;
+        max-height: 75vh;
+        padding: 28px 19px;
+    }
+
+    .paper-content {
+        padding: 10px 0;
+    }
+
+    .letter-paper p {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+}
+
+}

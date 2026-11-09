@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+  <base href="./">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#241710">
+
+    <meta name="description" content="Okulumuzun En Nadide Öğretmenlerine">
+
+    <title>Okulumuzun, En Nadide Öğretmenlerine</title>
+
+    <!-- Yazı tipleri -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  
+
+    <main>
+
+        <!-- =================================
+             1. KARŞILAMA EKRANI
+        ================================== -->
+
+        <section id="welcome">
+
+            <div class="welcome-content">
+
+                <p class="eyebrow">
+                    24 KASIM · ÖĞRETMENLER GÜNÜ
+                </p>
+
+                <h1>
+                    Okulumuzun, En Nadide<br>
+                    <span>Öğretmenlerine...</span>
+                </h1>
+
+                <p class="welcome-description">
+                    
+                    <br>"Öğretmenler; yeni nesli, Cumhuriyetin fedakâr öğretmen ve eğitimcilerini, sizler yetiştireceksiniz ve yeni nesil, sizin eseriniz olacaktır." ~Mustafa Kemal Atatürk<br>
+                  <br> Mehmet Akif Ersoy Bilişim Öğrencileri Tarafından Hazırlanmıştır...  <br>
+                  
+                </p>
+
+                <label class="input-label" for="teacherName">
+                    Lütfen Adınızı Ve Soyadınızı Girin
+                </label>
+
+                <input
+                    type="text"
+                    id="teacherName"
+                    placeholder="Örn. Ahmet Yılmaz"
+                    autocomplete="name"
+                >
+
+                <button id="continueButton" type="button">
+                    Size Özel Mektubumuzu Keşfedin; ✧
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             2. MEKTUP EKRANI
+        ================================== -->
+
+        <section id="letterSection" class="letter-section" hidden>
+
+            <p class="eyebrow">
+                SİZİN İÇİN HAZIRLANDI
+            </p>
+
+            <h1 id="displayTeacherName"></h1>
+
+            <div class="envelope-scene">
+
+                <div class="envelope" id="envelope">
+
+                    <!-- Zarfın arka yüzü -->
+                    <div class="envelope-back"></div>
+
+                    <!-- Mektup kâğıdı -->
+                    <article class="letter-paper">
+
+                        <div class="paper-content">
+
+                            <p class="letter-greeting">
+                                Saygıdeğer
+                                <span id="letterTeacherName"></span>
+                                Öğretmenimiz;
+                            </p>
+
+                            <h2>
+                              Öğretmenler Gününüz Kutlu Olsun!
+                            </h2>
+
+                            <p>
+                                Siz yalnızca bir öğretmen değil;
+                                önümüzü nur gibi aydınlatan bir ışık,
+                                kalbimize yön veren bir fikir,
+                                ve zor anlarımızda yanımızda olan bir rehbersiniz...
+                            </p>
+
+                            <p>
+                                Bize yalnızca dersleri değil;
+                                düşünmeyi, öğrenmeyi, hayal kurmayı
+                                ve pes etmemeyi de öğrettiniz.
+                                Bundan dolayı hepinize minnettarız.
+                            </p>
+
+    
+
+                            <p class="letter-ending">
+                                Sizi Çok Seven Öğrencileriniz...
+                            </p>
+
+                            <div class="letter-signature">
+
+                                <div class="signature-line"></div>
+
+                                <p>
+                                    
+                                </p>
+
+                                <h3>
+                                    Okulumuzun, En Nadide<br>
+                                    Öğretmenlerine...
+                                </h3>
+
+                                <span class="signature-star">
+                                    ✧
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <!-- Zarfın ön yüzü -->
+                    <div class="envelope-front"></div>
+
+                    <!-- Zarf kapağı -->
+                    <div class="envelope-flap"></div>
+
+                    <!-- Mühür -->
+                    <div class="envelope-seal">
+                        ✦
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Mektup butonları -->
+
+            <button id="openLetterButton" type="button">
+                Mektubunuzu Açın. ✧
+            </button>
+
+            <button id="finalButton" type="button" hidden>
+                Müdür Beyden Gelen Mesajınızı Görün. ✧
+            </button>
+
+            <button id="backButton" type="button">
+                Geri Dön.
+            </button>
+
+        </section>
+
+
+        <!-- =================================
+             3. FİNAL EKRANI
+        ================================== -->
+
+        <section id="finalScreen" class="final-screen" hidden>
+
+            <div class="final-decoration">
+                ✦
+            </div>
+
+            <p class="eyebrow">
+                24 KASIM · ÖĞRETMENLER GÜNÜ
+            </p>
+
+            <div class="final-ornament">
+                ❦
+            </div>
+
+            <h2>
+                Öğretmenler Gününüz Kutlu Olsun.<br>
+            </h2>
+
+            <p
+                class="final-teacher-name"
+                id="finalTeacherName">
+            </p>
+
+            <div class="final-divider"></div>
+
+            <p class="final-message">
+                Müdürümüzden Mesaj;
+              .
+              .
+              .
+              .
+              .
+            </p>
+
+            <p class="final-thanks">
+                İyi ki varsınız.
+            </p>
+
+            <div class="final-star">
+                ✧
+            </div>
+
+            <button id="homeButton" type="button">
+                Yeniden Başlat
+            </button>
+
+            <p class="final-footer">
+                En İçten Sevgilerimizle Hazırlandı.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="script.js"></script>
+
+</body>
+</html>
